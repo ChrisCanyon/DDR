@@ -70,7 +70,7 @@ public class PlayController {
 
         Platform.runLater(init);
 
-        speed = 1;
+        speed = .5;
 
         updateTimer.setName("timer");
         updateTimer.start();
@@ -102,6 +102,9 @@ public class PlayController {
         while(mutex == 1){
 
         }
+
+        speed = .5 + score * .01;
+
         mutex = 1;
         remove();
         move();
@@ -109,21 +112,27 @@ public class PlayController {
     }
 
 
-    void add(){
+    private void add(){
+        try {
+            Thread.sleep(2500);
         while (true) {
-            try {
                 Thread.sleep((long) (500 / speed));
                 Platform.runLater(adder);
-            } catch (Throwable e) {
-                e.printStackTrace();
-            }
+
         }
+        } catch (Throwable e) {
+        e.printStackTrace();
+    }
     }
 
-    void addArrow(){
+    private void addArrow() {
 
         while(mutex == 1){
-
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         mutex = 1;
 
@@ -227,15 +236,15 @@ public class PlayController {
     @FXML
     void keyHandler(KeyEvent event) {
 
-        if(event.getCode().equals(KeyCode.LEFT)){
+        if(event.getCode().equals(KeyCode.D)){
             check(leftGoal.getLayoutX());
-        } else if (event.getCode().equals(KeyCode.DOWN)){
+        } else if (event.getCode().equals(KeyCode.G)){
             check(downGoal.getLayoutX());
 
-        } else if (event.getCode().equals(KeyCode.UP)){
+        } else if (event.getCode().equals(KeyCode.Y)){
             check(upGoal.getLayoutX());
 
-        } else if (event.getCode().equals(KeyCode.RIGHT)){
+        } else if (event.getCode().equals(KeyCode.U)){
             check(rightGoal.getLayoutX());
         }
         background.requestFocus();
